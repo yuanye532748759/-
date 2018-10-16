@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // let 
+  if (true) {
+    let a = 40;
+    console.log(a); //40
+  }
+//  console.log(a); // undefined
+// const
+const LANGUAGES = ['Js', 'Ruby', 'Python', 'Go'];
+// LANGUAGES = "Javascript"; // 错误.
+// LANGUAGES.push('Java'); // 正常.
+console.log(LANGUAGES); // ['Js', 'Ruby', 'Python', 'Go', 'Java']
+// 箭头函数
+// 老语法
+function oldOne() {
+ console.log("Hello World..!");
+}
+// 新语法
+var newOne = () => {
+ console.log("Hello World..!");
+}
+//默认参数
+let Func = (a, b = 10) => {
+ return a + b; 
+}
+Func(20); // 20 + 10 = 30
+//字符串拼接方法
+var value1 = 'vuex'
+var value2 = 'router'
+console.log(`${value1}-${value2}使用hhhh`)
+//展开属性
+const arr1 = [1,2,45,6]
+const arr2 = [45,6,99,88]
+var arr3 = [...new Set([...arr1,...arr2])]
+console.log(arr3)
+console.log(Math.max(...arr3))
+var obj1 = {
+  name: 'vue',
+}
+var obj2 = {
+  name: 'react'
+}
+// var obj3 = {
+//   ...obj1,
+//   ...obj2
+// }
+// console.log(obj3)
+// Maps
+var map = new Map();
+map.set('name', 'John');
+map.set('name', 'Andy');
+map.set(1, 'number one');
+map.set(NaN, 'No value');
+map.get('name'); // Andy. 注意John被Andy替换了.
+map.get(1); // number one
+map.get(NaN); // No value
+console.log(map.size); // 2. 返回map的大小.
+
+console.log(map.keys()); // 返回所有的键. 
+console.log(map.values()); // 返回所有的值.
+//set集合
+var sets = new Set();
+sets.add('a');
+sets.add('b');
+sets.add('a'); // 添加重复的值.
+for (let element of sets) {
+ console.log(element);
+}
+//es6类的概念
+class Person{
+  constructor(firstName, lastName, age) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
+  displayName() {
+   return `${this.firstName} - ${this.lastName}`;
+  }
+ }
+ class Employee extends Person {
+  constructor(firstName, lastName, age, salary) {
+   super(firstName, lastName, age);
+   this.salary = salary;
+  }
+  displaySalary() {
+   return `${this.salary}`;
+  }
+  displayName() {
+   return super.displayName();
+  }
+  displayAge() {
+   return this.age;
+  }
+ }
+ let manager = new Employee("Jon", "Snow", 23, 100);
+ console.log(manager.displaySalary());
+ console.log(manager.displayName());
+ console.log(manager.displayAge());
+//解构对象和数组
+let personObj = {firstName: "Jon", lastName: "Snow", attr:{color:'red',width:['30px',{max:'50px'}]}}
+const {firstName, lastName, attr, attr: { color }, attr: {width:[x, max]}} = personObj
+console.log(attr)
+console.log(color)
+console.log(x)
+console.log(max)
+// promise
+const apiCall = new Promise((reslove, reject)=>{
+    if (false) {
+      reslove('data')
+    } else {
+      reject('err')   
+    }
+})
+// function getResponse() {
+//   return new Promise(function(resolve, reject) {
+//     setTimeout(function() {
+//       resolve("Response from API. Executed after 5 secs");
+//     }, 5000);
+//   });
+// }
+
+apiCall.then((date)=>{
+  console.log(date)
+}).catch((err)=>{
+  console.log(err)
+})
+</script>
+
+</html>
