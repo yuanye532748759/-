@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		font-family: 微软雅黑
+	}
+
+	.content {
+		margin-left: 400px;
+		margin-top: 400px;
+	}
+
+	.colorbox {
+		width: 200px;
+		height: 100px;
+		border: 1px solid #AFAFAF;
+		border-radius: 3px;
+		box-shadow: 1px 5px 5px #EFEFEF;
+		margin-top: 10px;
+		display: none;
+	}
+
+	.arrow-range {
+		border: 0px solid #AFAFAF;
+		width: 20px;
+		height: 10px;
+		left: 10px;
+		position: relative;
+		top: -10px;
+	}
+
+	.arrow-outer {
+		width: 0px;
+		height: 0px;
+		display: block;
+		border-bottom: 10px solid #AFAFAF;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		/*制作上三角*/
+	}
+
+	.arrow-inner {
+		width: 0px;
+		height: 0px;
+		display: block;
+		border-bottom: 9px solid rgb(126, 28, 28);
+		border-left: 9px solid transparent;
+		border-right: 9px solid transparent;
+		position: relative;
+		left: 1.4px;
+		top: -8px;
+	}
+</style>
+
+<body>
+	<div class="content">
+		<button id="showLayout">弹出</button>
+		<div class="colorbox">
+
+			<div class="arrow-range">
+				<b class="arrow-outer"></b>
+				<b class="arrow-inner"></b>
+				<div id="box">
+					<input type="text" value="sssss">
+					<div>你好世界</div>
+				</div>
+
+			</div>
+		</div>
+</body>
+<script type="text/javascript" src="assets/plug/jquery/jquery-2.2.4.js"></script>
+<script>
+	var button = document.getElementById('showLayout')
+	var layout = document.getElementsByClassName('colorbox')[0]
+	button.onclick = function (e) {
+		layout.style.display = 'block'
+
+	}
+	$('.colorbox').on('click', function (e) {
+		// var parent=$(e.target).parents('.colorbox');
+
+	})
+	document.onclick = function (e) {
+		var parent = $(e.target).parents('.colorbox, content');
+		console.log(parent)
+	}
+	var vpc = [{ name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }]
+	var vrc = [{ name: 'f' }, { name: 'b' }, { name: 'd' }, { name: 'e' }]
+	var vec = [{ name: 'M' }, { name: 'J' }, { name: 'd' }, { name: 'e' }]
+	var obj = {}
+	vpc.forEach((item, index) => {
+		obj[item.name] = []
+		obj[item.name].push('vpc')
+	})
+		vrc.forEach((item, index) => {
+			if (!obj[item.name]) {
+				obj[item.name] = []
+				obj[item.name].push('vrc')
+			} else {
+
+				 obj[item.name].push('vrc')
+
+			}
+		})
+    vec.forEach((item, index) => {
+			if (!obj[item.name]) {
+				obj[item.name] = []
+				obj[item.name].push('vec')
+			} else {
+
+				 obj[item.name].push('vec')
+
+			}
+		})
+	  vpc.forEach((item, index)=>{
+			if (obj[item.name].length === 1) {
+				item.src = 'vpc.png'
+			} else if (obj[item.name].length === 2) {
+				if (obj[item.name][1] === 'vrc') {
+					item.src = 'vpc-vrc.png'	
+				} else {
+					item.src = 'vpc-vec.png'	
+				}
+			} else {
+				item.src = 'vpc-vrc-vec.png'
+			}
+		})
+   
+</script>
+
+</html>
