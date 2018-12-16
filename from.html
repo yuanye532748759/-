@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="button">点击</button>
+  <div style="width:100px;height:30px;border:1px solid red;display:none" id="box">
+
+  </div>
+  <form id="formResult">
+  <div class="item">
+    <input type="text"  name="abc" id="abc" >
+  </div>
+  <div class="item">
+    <input type="text"  name="bcd" id="bcd">
+  </div>
+  <div class="item">
+    <input type="text"  name="fee" id="fee">
+    
+  </div>
+  <p style="display:none"></p>
+</form>
+  
+</body>
+<script src="assets/jquery/jquery-2.2.4.js">
+
+</script>
+<script>
+var button = document.getElementById('button')
+var box = document.getElementById('box')
+button.onclick = function (e) {
+  if(box.style.display=="block"){
+    box.style.display='none';
+    }else{
+      box.style.display='block';
+    }
+}
+var json ={
+  abc:'55',
+  bcd:'4.5',
+  fee:'75'
+}
+var timerId = {
+  empty: null,
+  reg: null
+}
+var errInfomation ={
+  abc:{require:'abc不能为空', regInfo:'abc格式不对'},
+  bcd:{require:'bcd不能为空', regInfo:'bcd格式不对'},
+  fee:{require:'bcd不能为空', regInfo:'bcd格式不对'},
+}
+function initFrom (formId, type, result) {
+  var inputGroup = $('#formResult').find('input')
+  if (!inputGroup.length) {
+    return 
+  }
+  $.each(inputGroup, function(index, item){
+    var name = item.name?item.name:''
+    item.value = result[name] || '';
+  })
+}
+initFrom('#formResult', 'input', json)
+$('#abc').blur(function(){
+  if($(this).val() == '') {
+    isEmptyReg($(this), 'abc')
+    return 
+  }
+  var reg = /^(?:1|[1-9][0-9]?|100)$/;
+  fromReg($(this), reg, 'abc')
+})
+function isEmptyReg(self, key) {
+  clearTimeout(timerId.empty)
+  clearTimeout(timerId.reg)
+  $('p').show()
+  $('p').html(errInfomation[key].require)
+  self.parent('.item').siblings().find('input').attr('disabled', true)
+   timerId.empty = setTimeout(function(){
+      self.val(json[key])
+      self.parent('.item').siblings().find('input').attr('disabled', false)
+      $('p').hide()
+    },3000)  
+}
+function fromReg (self, reg, key) {
+  $('p').hide()
+  clearTimeout(timerId.empty)
+  clearTimeout(timerId.reg)
+  var value = self.val();
+  if (reg.test(value)) {
+    self.css({
+      'border':"1px solid green"
+    })
+    self.parent('.item').siblings().find('input').attr('disabled', false)
+    json[key] = value
+  } else {
+    self.parent('.item').siblings().find('input').attr('disabled', true)
+    self.css({
+      'border':"1px solid red"
+    })
+    $('p').html(errInfomation[key].regInfo)
+    $('p').show()
+    timerId.reg = setTimeout(function(){
+      refresh(self)
+    },3000)
+  }
+}
+function refresh () {
+  self.val(json[key])
+      self.css({
+      'border':"1px solid green"
+      })
+      self.parent('.item').siblings().find('input').attr('disabled', false)
+      $('p').hide()
+}
+</script>
+</html>
