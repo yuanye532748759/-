@@ -7,33 +7,140 @@
   <title>Document</title>
 </head>
 <style>
-  #top {
-	position: absolute;
-	width: 0px;
-	height: 0px;
-	line-height: 0px;/*为了防止ie下出现题型*/
-	border-bottom: 10px solid #89b007;
-	border-left: 10px solid #fff;
-	border-right: 10px solid #fff;
-	left: 76px;
-	top: -10px;
-}
-#first {
-	border-radius:8px;
-	-moz-border-radius:8px;-ms-border-radius:8px;-o-border-radius:8px;-webkit-border-radius:8px;
-	position: absolute;
-	height: 150px;
-	width: 300px;
-	background: #89b007;
-	left: 22px;
-	top: 33px;
-}
-#first p{ padding:10px; line-height:1.5; color:#FFF;}
+
+.tag-top{
+             margin: 20px;
+             padding: 5px;
+             width:300px;
+             height:60px;
+             border:2px solid #f99;
+             position:relative;
+             background-color:#FFF;
+             /*设置圆角*/
+             -webkit-border-radius:5px;
+             -moz-border-radius:5px;
+             border-radius:5px;
+         }
+        .tag-top:before,.tag-top:after{
+            content:"";
+            display:block;
+            border-width:15px;
+            position:absolute;
+            top:-30px;
+            left:100px;
+            border-style:solid dashed dashed solid;
+            border-color:transparent  transparent #f99 transparent;
+            font-size:0;
+            line-height:0;
+        }
+        .tag-top:after{
+            top:-27px;
+            border-color: transparent transparent #FFF transparent;
+        }
+        /*下三角*/
+        .tag-bottom{
+            margin: 20px;
+            padding: 5px;
+            width:300px;
+            height:60px;
+            border:2px solid #f99;
+            position:relative;
+            background-color:#FFF;
+            /*设置圆角*/
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+        }
+        .tag-bottom:before,.tag-bottom:after{
+            content:"";
+            display:block;
+            border-width:15px;
+            position:absolute;
+            bottom:-30px;
+            left:100px;
+            border-style:solid dashed dashed solid;
+            border-color:#f99 transparent  transparent transparent;
+            font-size:0;
+            line-height:0;
+        }
+        .tag-bottom:after{
+            bottom:-27px;
+            border-color: #FFF transparent transparent transparent;
+        }
+        /*左三角*/
+        .tag-left{
+            margin: 20px;
+            padding: 5px;
+            width:300px;
+            height:60px;
+            border:2px solid #f99;
+            position:relative;
+            background-color:#FFF;
+            /*设置圆角*/
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+        }
+        .tag-left:before,.tag-left:after{
+            content:"";
+            display:block;
+            border-width:15px;
+            position:absolute;
+            left:-30px;
+            top:20px;
+            border-style:dashed solid solid dashed;
+            border-color:transparent #f99 transparent  transparent;
+            font-size:0;
+            line-height:0;
+        }
+        .tag-left:after{
+            left:-27px;
+            border-color:transparent #FFF transparent transparent ;
+        }
+        .tag-right{
+            margin: 20px;
+            padding: 5px;
+            width:300px;
+            height:60px;
+            border:2px solid #f99;
+            position:relative;
+            background-color:#FFF;
+            /*设置圆角*/
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+        }
+        .tag-right:before,.tag-right:after{
+            content:"";
+            display:block;
+            border-width:15px;
+            position:absolute;
+            right:-30px;
+            top:20px;
+            border-style:dashed solid solid dashed;
+            border-color:transparent transparent transparent #f99;
+            font-size:0;
+            line-height:0;
+        }
+        .tag-right:after{
+            right:-27px;
+            border-color:transparent transparent  transparent #FFF ;
+				}
+
 </style>
 <body>
-  <div id="first">
-    <p>带背景颜色的小三角实现是比较简单的！</p>
-      <span id="top"></span>
-    </div>
+
+	<div class="tag-top">
+    css3气泡框
+</div>
+<!-- <div class="tag-bottom">
+    css3气泡框
+</div>
+<div class="tag-left">
+    css3气泡框
+</div>
+<div class="tag-right">
+    css3气泡框
+	</div> -->
 </body>
 </html>
