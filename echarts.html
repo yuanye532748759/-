@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+     //表示折线图
+     var ItemLine = function () {
+        return {
+            name: '',
+            type: 'line',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                }
+            },
+            lineStyle: {
+                normal: {
+                    width: 3,
+                    shadowColor: 'rgba(0,0,0,0.4)',
+                    shadowBlur: 10,
+                    shadowOffsetY: 10
+                }
+            },
+            data: []
+        }
+    };
+    //表示柱状图
+    var ItemBar = function () {
+        return {
+            name: '',
+            type: 'bar',
+            data: []
+        }
+
+    }
+
+    var legends=[];
+var xDateArr=[];
+var SeriesTotal=[];
+xDataArr=data.total.date;
+for (var k in data.total.element) {
+ //给legend赋值
+ lengends.push(data.total.element[k].name);
+     //核心，给series赋值，分开包装的思想。
+        if (k == 0) {
+            var itemLine = new ItemLine();
+            itemLine.name = data.total.element[k].name;
+            itemLine.data = data.total.element[k].value;
+            SeriesTotal.push(itemLine);
+        } else {
+            var itemBar = new ItemBar();
+            itemBar.name = data.total.element[k].name;
+            itemBar.data = data.total.element[k].value;
+            SeriesTotal.push(itemBar);
+        }
+    }
+
+    var myChartTransactionTotal = echarts.init(document.getElementById('main_chart_transaction_total'));
+    option.legend.data = lengends;
+    //注意这里是xAxis[0],如果直接写xAxis会报错，因为x轴默认有2个，上半年轴和下半轴。
+    option.xAxis[0].data = data.total.date;
+    option.series = SeriesTotal;
+    //这里最好加上true参数，否则会出现切换图表时前面数据不会清除掉的情况。
+    myChartTransactionTotal.setOption(option, true);
+</script>
+</html>
