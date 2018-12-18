@@ -70,5 +70,17 @@ for (var k in data.total.element) {
     option.series = SeriesTotal;
     //这里最好加上true参数，否则会出现切换图表时前面数据不会清除掉的情况。
     myChartTransactionTotal.setOption(option, true);
+    var total = {
+      // 年份
+      date:[2018, 2017],
+      chartDate:{
+        // 柱状图,value对应 2018， 2017的数据
+        bar:[{name:'CDR', value:[123, 456]},{name:'EDR', value:[123, 456]}],
+        //折线图
+        line:[{name:'XXX', value:[123, 456]}]
+      },
+      // 网元信息,二位数组
+      dcInfo:[['2018网源A','2018网源B']],
+    }
 </script>
 </html>
