@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  function numberDate(date) {
+    var numberDate = Number(date)
+    if (isNaN(numberDate)) {
+      return true
+    }
+    var value = null
+    var countNumber = numberDate * 100
+    if (numberDate.toString().indexOf('.') > -1) {
+      var floatNumber = numberDate.toString().split('.')[1]
+      if (floatNumber.length > 2) {
+        value = countNumber.toFixed(2)
+      } else {
+        value = countNumber
+      }
+    } else {
+      value = countNumber
+    }
+    console.log(value)
+  }
+  var object = {}
+  var arr = [{ a: null, b: '35', c: '60' }, { a: null, b: '36', c: '67' }, { a: null, b: '31', c: '65' }]
+  function dealDate(res, obj) {
+    res.forEach(function (item, index) {
+      if (item.a !== null) {
+        echartDate(item.a, 'a', obj)
+      }
+      if (item.b !== null) {
+        echartDate(item.b, 'b', obj)
+      }
+      if (item.c !== null) {
+        echartDate(item.c, 'c', obj)
+      }
+      
+    })
+  }
+
+  function echartDate(value, key, obj) {
+    if (value) {
+      if (!obj[key]) {
+        obj[key] = []
+        obj[key].push(value)
+      } else {
+        obj[key].push(value)
+      }
+    }
+  }
+  dealDate(arr, object)
+  console.log(object)
+</script>
+
+</html>
