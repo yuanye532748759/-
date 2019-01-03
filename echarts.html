@@ -1,86 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
+<style>
+    .inner {
+        width: 265px;
+        height: 400px;
+        position: absolute;
+        top: 33px;
+        left: 13px;
+        /*cursor: pointer;*/
+        overflow: hidden;
+    }
+
+    .innerbox {
+        overflow-x: hidden;
+        overflow-y: auto;
+        color: #000;
+        font-size: .7rem;
+        font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, "黑体", Arial, Tahoma;
+        height: 100%;
+    }
+
+    /*滚动条样式*/
+
+    .innerbox::-webkit-scrollbar {
+        /*滚动条整体样式*/
+        width: 4px;
+        /*高宽分别对应横竖滚动条的尺寸*/
+        height: 4px;
+    }
+
+    .innerbox::-webkit-scrollbar-thumb {
+        /*滚动条里面小方块*/
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .innerbox::-webkit-scrollbar-track {
+        /*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 0;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .box {
+        /* display: flex; */
+        /* height: inherit; */
+        width: 100px;
+        border: 1px solid #2a2728;
+        height: inherit;
+        
+        /* display: flex;
+        flex-direction:column;
+        justify-content: space-between; */
+        box-sizing: border-box;
+        position: static;
+    }
+
+    .list {
+        /* flex:1; */
+        width: 100px;
+
+        height: 50px;
+        border: 1px solid gold;
+        /* position: absolute; */
+    }
+</style>
+
 <body>
-  
+    <!-- <div style="height:800px;width:1000px;border:1px solid red;margin-bottom:100px">
+        <div id="main" style="width: 1000px;"></div>
+    </div> -->
+    <div style="height:200px;width:300px;border:1px solid red;overflow-y: scroll;">
+        <div class="box">
+            <div class="list"></div>
+            <div class="list"></div>
+            <div class="list"></div>
+            <div class="list"></div>
+            <div class="list"></div>
+            <div class="list"></div>
+        </div>
+    </div>
+
 </body>
-<script>
-     //表示折线图
-     var ItemLine = function () {
-        return {
-            name: '',
-            type: 'line',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'top',
-                }
-            },
-            lineStyle: {
-                normal: {
-                    width: 3,
-                    shadowColor: 'rgba(0,0,0,0.4)',
-                    shadowBlur: 10,
-                    shadowOffsetY: 10
-                }
-            },
-            data: []
-        }
-    };
-    //表示柱状图
-    var ItemBar = function () {
-        return {
-            name: '',
+<script src="echarts.common.min.js"></script>
+<!-- <script>
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            width: 300,
+            data: [{
+                name: '销量', textStyle: {
+                    fontSize: 12,
+                    fontWeight: 'bolder',
+                    // color: 'transparent',
+                    borderColor: '#ccc',
+                    borderWidth: 2
+
+                },
+            }, '邮件营销', '联盟广告', '视频广告', '搜索引擎', '百度', '谷歌', '必应', '其他']
+        },
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
             type: 'bar',
-            data: []
-        }
-
-    }
-
-    var legends=[];
-var xDateArr=[];
-var SeriesTotal=[];
-xDataArr=data.total.date;
-for (var k in data.total.element) {
- //给legend赋值
- lengends.push(data.total.element[k].name);
-     //核心，给series赋值，分开包装的思想。
-        if (k == 0) {
-            var itemLine = new ItemLine();
-            itemLine.name = data.total.element[k].name;
-            itemLine.data = data.total.element[k].value;
-            SeriesTotal.push(itemLine);
+            data: [5, 20, 36, 10, 10, 20],
+            itemStyle: {
+                normal: {
+                    color: 'transparent',
+                    borderColor: "red"
+                }
+            }
+        },
+        {
+            name: '邮件营销',
+            type: 'bar',
+            stack: '广告',
+            data: [120, 132, 101, 134, 90, 230],
+            itemStyle: {
+                normal: {
+                    color: 'transparent',
+                    borderColor: "green"
+                }
+            }
+        },
+        {
+            name: '联盟广告',
+            type: 'bar',
+            stack: '广告',
+            data: [220, 182, 191, 234, 290, 330],
+            itemStyle: {
+                normal: {
+                    color: 'transparent',
+                    borderColor: "blue"
+                }
+            }
+        },
+        {
+            name: '视频广告',
+            type: 'bar',
+            stack: '广告',
+            data: [150, 232, 201, 154, 190, 330]
+        }]
+    };
+    myChart.setOption(option);
+    myChart.getDom().style.height = 800 + "px";
+    myChart.resize()
+    // window.onresize = function () {
+    //     myChart.resize()
+    // }
+    console.log(document.body.clientWidth)
+    var flag = true
+    window.onresize = function () {
+        console.log(document.body.clientWidth)
+        if (document.body.clientWidth < 800) {
+            myChart.getDom().style.height = 'calc(100% - 100px)';
+            myChart.resize()
         } else {
-            var itemBar = new ItemBar();
-            itemBar.name = data.total.element[k].name;
-            itemBar.data = data.total.element[k].value;
-            SeriesTotal.push(itemBar);
+            myChart.getDom().style.height = 800 + "px";
+            myChart.resize()
         }
     }
 
-    var myChartTransactionTotal = echarts.init(document.getElementById('main_chart_transaction_total'));
-    option.legend.data = lengends;
-    //注意这里是xAxis[0],如果直接写xAxis会报错，因为x轴默认有2个，上半年轴和下半轴。
-    option.xAxis[0].data = data.total.date;
-    option.series = SeriesTotal;
-    //这里最好加上true参数，否则会出现切换图表时前面数据不会清除掉的情况。
-    myChartTransactionTotal.setOption(option, true);
-    var total = {
-      // 年份
-      date:[2018, 2017],
-      chartDate:{
-        // 柱状图,value对应 2018， 2017的数据
-        bar:[{name:'CDR', value:[123, 456]},{name:'EDR', value:[123, 456]}],
-        //折线图
-        line:[{name:'XXX', value:[123, 456]}]
-      },
-      // 网元信息,二位数组
-      dcInfo:[['2018网源A','2018网源B']],
-    }
+
+</script> -->
+<script>
+
 </script>
+
 </html>
