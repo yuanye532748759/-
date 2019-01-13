@@ -39,6 +39,13 @@ button.onclick = function (e) {
       box.style.display='block';
     }
 }
+window.onresize = function () {
+  if ($("#box").css("display")=='none' ) {
+    console.log('none')
+  } else {
+    console.log('show')
+  }
+}
 var json ={
   abc:'55',
   bcd:'4.5',
@@ -124,7 +131,49 @@ function clearNoNum(obj) {
         obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的  
         obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");  
         obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数  
+} 
 
-}  
+
+
+
+function floatAdd(arg1,arg2){    
+     var r1,r2,m;    
+     try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}    
+     try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}    
+     m=Math.pow(10,Math.max(r1,r2));    
+     return (arg1*m+arg2*m)/m;    
+}    
+      
+//减    
+function floatSub(arg1,arg2){    
+    var r1,r2,m,n;    
+    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}    
+    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}    
+    m=Math.pow(10,Math.max(r1,r2));    
+    //动态控制精度长度    
+    n=(r1>=r2)?r1:r2;    
+    return ((arg1*m-arg2*m)/m).toFixed(n);    
+}    
+       
+//乘    
+function floatMul(arg1,arg2)   {     
+    var m=0,s1=arg1.toString(),s2=arg2.toString();     
+    try{m+=s1.split(".")[1].length}catch(e){}     
+    try{m+=s2.split(".")[1].length}catch(e){}     
+    return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m);     
+}     
+      
+      
+//除   
+function floatDiv(arg1,arg2){     
+      var t1=0,t2=0,r1,r2;     
+      try{t1=arg1.toString().split(".")[1].length}catch(e){}     
+      try{t2=arg2.toString().split(".")[1].length}catch(e){}     
+        
+      r1=Number(arg1.toString().replace(".",""));  
+   
+      r2=Number(arg2.toString().replace(".",""));     
+      return (r1/r2)*Math.pow(10,t2-t1);     
+} 
 </script>
 </html>
