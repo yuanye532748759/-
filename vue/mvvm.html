@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MVVM</title>
+    <script>
+        //第一步 框架的 架构 
+        //第二步 把模型的数据 展示到界面  M - V 
+        //第三 输入数据同步到模型 V -M
+
+        //原理 事件  input 
+        // 把文本框的数据获取 --->把模型层的数据更改 this.$data --》执行update方法
+
+       // 什么时候执行比较的好？ 
+        // get set 
+
+        //发布者
+        class Vue{
+            constructor(options){
+                //传入的配置参数
+                this.options = options;
+                //传入的数据
+                this.$data = options.data;
+                //传入的根元素
+                this.$el = document.querySelector(options.el);
+                //存放订阅者信息
+                this._directives = {};
+
+                //处理传入的数据 
+                this.Observer(this.$data);
+                //解析器 解析指令标签
+                this.Compile(this.$el);
+            }
+            Observer(data){
+               for(let key in data){
+                    if(data.hasOwnProperty(key)){
+                        this._directives[key] = [];
+                        //保存与mytext相关的一些指令 对象
+                        //console.log(this._directives[key]);
+                    }
+                   // console.log(this._directives);
+                   //{myText:[],mybox:[]}
+
+                    let Val = data[key];//当前的值 今晚有优惠券 888！
+                    let _obj = this._directives[key];
+                    
+                    //修改已经存在的方法 
+                    Object.defineProperty(this.$data, key, {
+                        get : function(){
+                            return Val;
+                        },
+                        set : function(newVal){//当this.$data 对象被设置值的时候  
+                            if(Val !== newVal){
+                                Val = newVal;
+                                _obj.forEach(element => {
+                                    element.update();
+                                });
+                            }
+
+                        }
+                    });
+
+               } 
+             }
+
+            Compile(el){
+                let nodes = el.children;//获取APP下面所有的子元素
+                for(let i = 0; i < nodes.length; i++){
+                    let node = nodes[i];//获取当前的元素
+                    if(node.children.length){
+                        this.Compile(node);
+                    }
+                    //递归的主要是目的是什么 ？ 无法筛选出指令元素 
+                    
+                    if(node.hasAttribute("v-text")){
+                        //获取v-text属性的值
+                        let attrValue = node.getAttribute("v-text");
+                        //console.log(attrValue);
+                        this._directives[attrValue].push(new Watcher(node,this, attrValue ,"innerHTML"));
+                    }
+
+                    if(node.hasAttribute("v-model") && node.tagName === "INPUT"){
+                        //<input type="text" v-model="myText">
+                        let _this = this;
+                        node.addEventListener("input",(function(){
+                      //获取v-text属性的值
+                             let attrValue = node.getAttribute("v-model");//
+                        //console.log(attrValue);
+                             _this._directives[attrValue].push(new Watcher(node, _this, attrValue ,"value"));
+                            
+                            return function(){//当文本框变化更新$data里面的值
+                                //attrValue  myText
+                                _this.$data[attrValue] = node.value;
+                                
+                            }
+
+                        })())
+                    }
+                }   
+           }
+            
+        }
+        // 订阅者 更新信息
+        class Watcher{
+            constructor(el, vm, exp, attr){
+                this.el = el;
+                this.vm = vm;
+                this.exp = exp;
+                this.attr = attr; 
+                this.update();//初始化显示数据
+            } 
+            update(){//d
+                this.el[this.attr] = this.vm.$data[this.exp];
+            }   
+        }    
+
+    </script>
+</head>
+<body>
+    <div id="app">
+        <h1>数据双向绑定</h1>
+        <div>
+            <div v-text="myText"></div>
+            <input type="text" v-model="myText">
+       
+         
+        </div>
+
+    </div>
+    <script>
+        const app = new Vue({
+            el : "#app",
+            data : {
+                myText : "今晚有优惠券 888！",
+        
+            }
+
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>proxy</title>
+</head>
+<body>
+    <div id="app">
+        <h1 id="xyd"></h1>
+        <input type="text" id="wgt"/>
+    </div>
+    <script>
+        //第一步 获取对象 准备好数据
+        let xyd = document.getElementById("xyd");
+        let wgt = document.getElementById("wgt");
+
+        const data = {//保存数据
+            text : "后宫佳丽三千"
+        }
+        //第二步 实现把 模型data 里面的数据显示到视图 （h1 input）
+        // xyd.innerHTML = data["text"];
+        // wgt.value = data["text"];
+        //第三步 实现把视图的数据绑定到模型 同时更新视频 
+        const myText = new Proxy(data, {
+            
+            set : function(target, prop, newVal){
+                target[prop] = newVal;
+                xyd.innerHTML = newVal;
+                wgt.value = newVal;
+                //console.log(data);
+            }
+        });
+
+        wgt.addEventListener("input", function(e){
+            //console.log(e.target.value);
+            myText.text = e.target.value;
+        },false);
+        myText.text = data.text;
+
+
+    
+
+
+
+
+
+        // let obj = {
+        //     a : 1
+        // }
+
+        // let proxyObj = new Proxy(obj, {
+        //     get : function(target, prop){
+        //         return target[prop];
+        //     },
+        //     set : function(target, prop, newVal){
+        //         target[prop] = newVal;
+        //     }
+        // });
+
+        // console.log(proxyObj.a);
+        // proxyObj.a = 2;
+        // console.log(proxyObj.a);
+
+        // console.log(obj);
+
+    
+    </script>
+</body>
+</html>
