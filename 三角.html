@@ -1,146 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <style>
+    .tag-top {
+        margin: 20px;
+        padding: 5px;
+        width: 300px;
+        height: 60px;
+        border: 2px solid #f99;
+        position: relative;
+        background-color: #FFF;
+        /*设置圆角*/
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
 
-.tag-top{
-             margin: 20px;
-             padding: 5px;
-             width:300px;
-             height:60px;
-             border:2px solid #f99;
-             position:relative;
-             background-color:#FFF;
-             /*设置圆角*/
-             -webkit-border-radius:5px;
-             -moz-border-radius:5px;
-             border-radius:5px;
-         }
-        .tag-top:before,.tag-top:after{
-            content:"";
-            display:block;
-            border-width:15px;
-            position:absolute;
-            top:-30px;
-            left:100px;
-            border-style:solid dashed dashed solid;
-            border-color:transparent  transparent #f99 transparent;
-            font-size:0;
-            line-height:0;
-        }
-        .tag-top:after{
-            top:-27px;
-            border-color: transparent transparent #FFF transparent;
-        }
-        /*下三角*/
-        .tag-bottom{
-            margin: 20px;
-            padding: 5px;
-            width:300px;
-            height:60px;
-            border:2px solid #f99;
-            position:relative;
-            background-color:#FFF;
-            /*设置圆角*/
-            -webkit-border-radius:5px;
-            -moz-border-radius:5px;
-            border-radius:5px;
-        }
-        .tag-bottom:before,.tag-bottom:after{
-            content:"";
-            display:block;
-            border-width:15px;
-            position:absolute;
-            bottom:-30px;
-            left:100px;
-            border-style:solid dashed dashed solid;
-            border-color:#f99 transparent  transparent transparent;
-            font-size:0;
-            line-height:0;
-        }
-        .tag-bottom:after{
-            bottom:-27px;
-            border-color: #FFF transparent transparent transparent;
-        }
-        /*左三角*/
-        .tag-left{
-            margin: 20px;
-            padding: 5px;
-            width:300px;
-            height:60px;
-            border:2px solid #f99;
-            position:relative;
-            background-color:#FFF;
-            /*设置圆角*/
-            -webkit-border-radius:5px;
-            -moz-border-radius:5px;
-            border-radius:5px;
-        }
-        .tag-left:before,.tag-left:after{
-            content:"";
-            display:block;
-            border-width:15px;
-            position:absolute;
-            left:-30px;
-            top:20px;
-            border-style:dashed solid solid dashed;
-            border-color:transparent #f99 transparent  transparent;
-            font-size:0;
-            line-height:0;
-        }
-        .tag-left:after{
-            left:-27px;
-            border-color:transparent #FFF transparent transparent ;
-        }
-        .tag-right{
-            margin: 20px;
-            padding: 5px;
-            width:300px;
-            height:60px;
-            border:2px solid #f99;
-            position:relative;
-            background-color:#FFF;
-            /*设置圆角*/
-            -webkit-border-radius:5px;
-            -moz-border-radius:5px;
-            border-radius:5px;
-        }
-        .tag-right:before,.tag-right:after{
-            content:"";
-            display:block;
-            border-width:15px;
-            position:absolute;
-            right:-30px;
-            top:20px;
-            border-style:dashed solid solid dashed;
-            border-color:transparent transparent transparent #f99;
-            font-size:0;
-            line-height:0;
-        }
-        .tag-right:after{
-            right:-27px;
-            border-color:transparent transparent  transparent #FFF ;
-				}
+    .tag-top:before,
+    .tag-top:after {
+        content: "";
+        display: block;
+        border-width: 15px;
+        position: absolute;
+        top: -30px;
+        left: 100px;
+        border-style: solid dashed dashed solid;
+        border-color: transparent transparent #f99 transparent;
+        font-size: 0;
+        line-height: 0;
+    }
 
+    .tag-top:after {
+        top: -27px;
+        border-color: transparent transparent #FFF transparent;
+    }
+
+    /*下三角*/
+
+    .tag-bottom {
+        margin: 20px;
+        padding: 5px;
+        width: 300px;
+        height: 60px;
+        border: 2px solid #f99;
+        position: relative;
+        background-color: #FFF;
+        /*设置圆角*/
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .tag-bottom:before,
+    .tag-bottom:after {
+        content: "";
+        display: block;
+        border-width: 15px;
+        position: absolute;
+        bottom: -30px;
+        left: 100px;
+        border-style: solid dashed dashed solid;
+        border-color: #f99 transparent transparent transparent;
+        font-size: 0;
+        line-height: 0;
+    }
+
+    .tag-bottom:after {
+        bottom: -27px;
+        border-color: #FFF transparent transparent transparent;
+    }
+
+    /*左三角*/
+
+    .tag-left {
+        margin: 20px;
+        padding: 5px;
+        width: 300px;
+        height: 60px;
+        border: 2px solid #f99;
+        position: relative;
+        background-color: #FFF;
+        /*设置圆角*/
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .tag-left:before,
+    .tag-left:after {
+        content: "";
+        display: block;
+        border-width: 15px;
+        position: absolute;
+        left: -30px;
+        top: 20px;
+        border-style: dashed solid solid dashed;
+        border-color: transparent #f99 transparent transparent;
+        font-size: 0;
+        line-height: 0;
+    }
+
+    .tag-left:after {
+        left: -27px;
+        border-color: transparent #FFF transparent transparent;
+    }
+
+    .tag-right {
+        margin: 20px;
+        padding: 5px;
+        width: 300px;
+        height: 60px;
+        border: 2px solid #f99;
+        position: relative;
+        background-color: #FFF;
+        /*设置圆角*/
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .tag-right:before,
+    .tag-right:after {
+        content: "";
+        display: block;
+        border-width: 15px;
+        position: absolute;
+        right: -30px;
+        top: 20px;
+        border-style: dashed solid solid dashed;
+        border-color: transparent transparent transparent #f99;
+        font-size: 0;
+        line-height: 0;
+    }
+
+    .tag-right:after {
+        right: -27px;
+        border-color: transparent transparent transparent #FFF;
+    }
+
+    .app {
+        height: 0;
+        width: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid red;
+    }
 </style>
-<body>
 
-	<div class="tag-top">
-    css3气泡框
-</div>
-<!-- <div class="tag-bottom">
-    css3气泡框
-</div>
-<div class="tag-left">
-    css3气泡框
-</div>
-<div class="tag-right">
-    css3气泡框
-	</div> -->
+<body>
+    <div class="tag-top">
+        css3气泡框
+    </div>
+    <div class="app">
+
+    </div>
 </body>
+
 </html>

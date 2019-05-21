@@ -79,62 +79,63 @@
 </body>
 <script type="text/javascript" src="assets/plug/jquery/jquery-2.2.4.js"></script>
 <script>
-	var button = document.getElementById('showLayout')
-	var layout = document.getElementsByClassName('colorbox')[0]
-	button.onclick = function (e) {
-		layout.style.display = 'block'
-
+	var arr = [23, 45, 97, 23, 12, 4]
+	for (var i = 0; i < arr.length; i++) {
+		for (var j = 0; j < arr.length - i; j++) {
+			let temp = null;
+			if (arr[j] > arr[j + 1]) {
+				temp = arr[j];
+				arr[j] = arr[j + 1]
+				arr[j + 1] = temp;
+			}
+		}
 	}
-	$('.colorbox').on('click', function (e) {
-		// var parent=$(e.target).parents('.colorbox');
+	function MathArr() {
+		let arr = []
 
-	})
-	document.onclick = function (e) {
-		var parent = $(e.target).parents('.colorbox, content');
-		console.log(parent)
+		while (arr.length < 10) {
+			let item = Math.ceil(Math.random() * 10);
+			if (arr.indexOf(item) < 0) {
+				arr.push(item)
+			}
+		}
+		return arr
 	}
-	var vpc = [{ name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }]
-	var vrc = [{ name: 'f' }, { name: 'b' }, { name: 'd' }, { name: 'e' }]
-	var vec = [{ name: 'M' }, { name: 'J' }, { name: 'd' }, { name: 'e' }]
-	var obj = {}
-	vpc.forEach((item, index) => {
-		obj[item.name] = []
-		obj[item.name].push('vpc')
+	var p = MathArr();
+	console.log(p)
+
+
+	const fn1 = await function () {
+		await fn2()
+		console.log(1)
+	}
+
+	async function fn2() {
+		await console.log(2)
+	}
+
+	fn1()
+
+	setTimeout(function () {
+		console.log(3)
 	})
-		vrc.forEach((item, index) => {
-			if (!obj[item.name]) {
-				obj[item.name] = []
-				obj[item.name].push('vrc')
-			} else {
 
-				 obj[item.name].push('vrc')
-
-			}
-		})
-    vec.forEach((item, index) => {
-			if (!obj[item.name]) {
-				obj[item.name] = []
-				obj[item.name].push('vec')
-			} else {
-
-				 obj[item.name].push('vec')
-
-			}
-		})
-	  vpc.forEach((item, index)=>{
-			if (obj[item.name].length === 1) {
-				item.src = 'vpc.png'
-			} else if (obj[item.name].length === 2) {
-				if (obj[item.name][1] === 'vrc') {
-					item.src = 'vpc-vrc.png'	
-				} else {
-					item.src = 'vpc-vec.png'	
-				}
-			} else {
-				item.src = 'vpc-vrc-vec.png'
-			}
-		})
-   
+	new Promise(function (resolve, reject) {
+		console.log(4)
+		resovle()
+	}).then(function () {
+		console.log(5)
+	}).then(function () {
+		console.log(6)
+	})
+	function objse(obj) {
+		if (typeof (obj) !== 'object') return;
+		var newObj = obj instanceof Array ? [] : {};
+		for (let key in obj) {
+			newObj[key] = typeof (obj[key]) === 'object' ? objse(obj[key]) : obj[key];
+		}
+		return newObj;
+	}
 </script>
 
 </html>
